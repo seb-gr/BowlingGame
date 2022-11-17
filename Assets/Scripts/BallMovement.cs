@@ -6,11 +6,14 @@ public class BallMovement : MonoBehaviour
 {
 
     [SerializeField] private float m_lateralVelocity = 0.25f;
+    [SerializeField] private float m_bowlVelocity = 10.0f;
     [SerializeField] private Vector3 m_pos;
     [SerializeField] private Vector3 m_startingPos = new Vector3(11.35f, 0.1f, 37.8f);
 
     [SerializeField] private Vector3 m_rightBarrier;
     [SerializeField] private Vector3 m_leftBarrier;
+
+    private Rigidbody rb;
 
 
     // Start is called before the first frame update
@@ -18,6 +21,9 @@ public class BallMovement : MonoBehaviour
     {
         m_rightBarrier = new Vector3(10.9f, 0.1f, 37.8f);
         m_leftBarrier = new Vector3(11.75f, 0.1f, 37.8f);
+
+        rb = GetComponent<Rigidbody>();
+        rb.detectCollisions = true;
     }
 
     // Update is called once per frame
@@ -35,6 +41,11 @@ public class BallMovement : MonoBehaviour
             transform.Translate(Vector3.right * m_lateralVelocity * Time.deltaTime);
         }
 
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            transform.Translate(Vector3.back * m_bowlVelocity * Time.time);
+        }
+
         //if (m_pos.x <= m_rightBarrier.x)
         //{
         //    m_firstDirection = false;
@@ -50,5 +61,13 @@ public class BallMovement : MonoBehaviour
             transform.position = m_startingPos;
         }
     }
+
+    // private void FixedUpdate()
+    //{
+    //    if (Input.GetKey(KeyCode.W))
+    //    {
+    //        rb.velocity = new Vector3(0, 0, - m_bowlVelocity);
+    //    }
+    //}
 }
 
