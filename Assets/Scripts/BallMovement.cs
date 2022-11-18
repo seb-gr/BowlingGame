@@ -6,7 +6,7 @@ public class BallMovement : MonoBehaviour
 {
 
     [SerializeField] private float m_lateralVelocity = 0.25f;
-    [SerializeField] private float m_bowlVelocity = 10.0f;
+    [SerializeField] private float m_bowlVelocity = -500.0f;
     [SerializeField] private Vector3 m_pos;
     [SerializeField] private Vector3 m_startingPos = new Vector3(11.35f, 0.1f, 37.8f);
 
@@ -43,7 +43,7 @@ public class BallMovement : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.W))
         {
-            transform.Translate(Vector3.back * m_bowlVelocity * Time.time);
+            rb.AddForce(new Vector3(0, 0, m_bowlVelocity));
         }
 
         //if (m_pos.x <= m_rightBarrier.x)
