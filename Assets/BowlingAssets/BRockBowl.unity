@@ -187,7 +187,6 @@ GameObject:
   - component: {fileID: 1697177}
   - component: {fileID: 3991418}
   - component: {fileID: 3991419}
-  - component: {fileID: 3991421}
   - component: {fileID: 3991422}
   m_Layer: 0
   m_Name: Ball
@@ -204,7 +203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3898201}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.35, y: 0.099999964, z: 37.8}
+  m_LocalPosition: {x: 11.35, y: 0.125, z: 37.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -224,6 +223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c2b7c173a0ef5419be9bfa3e80ec3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Arrow: {fileID: 0}
+  m_aimDir: 0
   m_lateralVelocity: 0.25
   m_bowlVelocity: -2500
   m_pos: {x: 0, y: 0, z: 0}
@@ -238,28 +239,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3898201}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 7.5
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.02
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!64 &3991421
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3898201}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: ce5563c56e3f1ff4cbfed4f831e27096, type: 3}
 --- !u!135 &3991422
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1809,7 +1796,7 @@ GameObject:
   - component: {fileID: 539130190}
   m_Layer: 0
   m_Name: PivotPoint
-  m_TagString: Untagged
+  m_TagString: PivotPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1842,7 +1829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19c9d5b0c32422489d5250979a3ce60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_aimRotationSpeed: 20
+  m_aimRotationSpeed: 25
 --- !u!4 &545331623 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 420192, guid: 418aee6c69649234b96fe283c5eb1b85,
@@ -3397,7 +3384,7 @@ Transform:
   - {fileID: 684805220}
   - {fileID: 1461474442}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &962238379 stripped
 GameObject:
@@ -3606,7 +3593,7 @@ Transform:
   m_Children:
   - {fileID: 856112380}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0.552, y: 0, z: 0}
 --- !u!1001 &1144812796
 PrefabInstance:
@@ -4693,7 +4680,7 @@ GameObject:
   - component: {fileID: 1634790313}
   m_Layer: 0
   m_Name: Arrow
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4846,7 +4833,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1674094330 stripped
 Transform:
@@ -4897,7 +4884,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1734473719
 PrefabInstance:
@@ -5195,7 +5182,7 @@ RectTransform:
   m_Children:
   - {fileID: 695530379}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5225,7 +5212,7 @@ GameObject:
   - component: {fileID: 1826420055}
   m_Layer: 0
   m_Name: Pins
-  m_TagString: Untagged
+  m_TagString: Pin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

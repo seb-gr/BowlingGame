@@ -8,6 +8,7 @@ public class HideArrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AimArrow = GameObject.FindWithTag("Arrow");
         AimArrow.SetActive(true);
     }
 

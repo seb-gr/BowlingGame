@@ -5,8 +5,11 @@ using UnityEngine;
 public class BallMovement : MonoBehaviour
 {
 
-    [SerializeField] private float m_lateralVelocity = 0.25f;
-    [SerializeField] private float m_bowlVelocity = -500.0f;
+    public GameObject Arrow;
+    [SerializeField] private float m_aimDir;
+    
+    [SerializeField] private float m_lateralVelocity = 0.25f; // Initializing Side-to-Side Speed
+    [SerializeField] private float m_bowlVelocity = -2500.0f; // Initializing bowl force
     [SerializeField] private Vector3 m_pos;
     [SerializeField] private Vector3 m_startingPos = new Vector3(11.35f, 0.1f, 37.8f);
 
@@ -15,59 +18,44 @@ public class BallMovement : MonoBehaviour
 
     private Rigidbody rb;
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        m_rightBarrier = new Vector3(10.9f, 0.1f, 37.8f);
+        m_rightBarrier = new Vector3(10.9f, 0.1f, 37.8f); // Assigning right & left starting lane barriers
         m_leftBarrier = new Vector3(11.75f, 0.1f, 37.8f);
 
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>(); // Detecting Rigidbody to apply force later
         rb.detectCollisions = true;
+
+        Arrow = GameObject.FindWithTag("PivotPoint"); // Grabbing the Pivot Point Game Object for Aim Direction Calculation
     }
 
-    // Update is called once per frame
     void Update()
     {
-        m_pos = transform.position;
+        m_pos = transform.position; // Calculating Position of Bowling Ball
+        m_aimDir = Arrow.transform.rotation.y; // Tracking the Y Rotation Angle of the Arrow
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && m_pos.x >= m_rightBarrier.x) // Move Ball Right on Lane
         {
             transform.Translate(Vector3.left * m_lateralVelocity * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && m_pos.x <= m_leftBarrier.x) // Move Ball Left on Lane
         {
             transform.Translate(Vector3.right * m_lateralVelocity * Time.deltaTime);
         }
 
-        if (Input.GetKeyUp(KeyCode.W))
+        if (Input.GetKeyUp(KeyCode.W)) // Shooting the Ball With Force Vectors
         {
-            rb.AddForce(new Vector3(0, 0, m_bowlVelocity));
+            rb.AddForce(new Vector3((m_aimDir *  m_bowlVelocity), 0, m_bowlVelocity));
         }
 
-        //if (m_pos.x <= m_rightBarrier.x)
-        //{
-        //    m_firstDirection = false;
-        //}
-
-        //if (m_pos.x >= m_leftBarrier.x)
-        //{
-        //    m_firstDirection = true;
-        //}
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)) // Ball Reset
         {
             transform.position = m_startingPos;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            rb.velocity = new Vector3(0, 0, 0);
+            rb.angularVelocity = new Vector3(0, 0, 0);
         }
     }
-
-    // private void FixedUpdate()
-    //{
-    //    if (Input.GetKey(KeyCode.W))
-    //    {
-    //        rb.velocity = new Vector3(0, 0, - m_bowlVelocity);
-    //    }
-    //}
 }
 
