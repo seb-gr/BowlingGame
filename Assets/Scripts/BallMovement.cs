@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BallMovement : MonoBehaviour
 {
@@ -60,5 +61,13 @@ public class BallMovement : MonoBehaviour
             ball_shot = false;
         }
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Pin")
+    //    {
+    //        TotalScore += 1;
+    //    }
+    //}
 }
 

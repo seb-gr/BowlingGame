@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PinReset : MonoBehaviour
 {
@@ -8,10 +9,10 @@ public class PinReset : MonoBehaviour
     public List<Vector3> m_startingPos;
     public List<Quaternion> m_startingRot;
 
-    public List<Vector3> m_newPos;
-    public List<Quaternion> m_newRot;
-
     public int TotalScore = 0;
+
+    // public List<Vector3> m_newPos;
+    // public List<Quaternion> m_newRot;
 
     // Start is called before the first frame update
     void Start()
@@ -26,8 +27,8 @@ public class PinReset : MonoBehaviour
             m_startingRot.Add(pin.transform.rotation);
         }
 
-        m_newPos = new List<Vector3>(); // Preparing Lists for Positions and Rotations that will be constantly updating
-        m_newRot = new List<Quaternion>();
+        // m_newPos = new List<Vector3>(); // Preparing Lists for Positions and Rotations that will be constantly updating
+        // m_newRot = new List<Quaternion>();
     }
 
     // Update is called once per frame
@@ -35,7 +36,7 @@ public class PinReset : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W)) // Starting the Coroutine to Check Any Changes in Pin Positions after ball is thrown
         {
-            StartCoroutine(CheckPins());
+            // StartCoroutine(CheckPins());
         }
         
         if (Input.GetKeyDown(KeyCode.Space)) // Resetting all pins to their original positions
@@ -55,39 +56,50 @@ public class PinReset : MonoBehaviour
             }
         }
     }
-
-    IEnumerator CheckPins()
-    {
-        var pins = GameObject.FindGameObjectsWithTag("Pin"); // Identifying every game oject with the 'Pin' tag attached
-        var i = 0; // Index Counter Variable
-
-        foreach (var new_pos in m_newPos)
-        {
-            if (new_pos != m_startingPos[i]) // For each new pin position, if it doesn't equal it's old position, increase score by 1 & move onto next pin to check
-            {
-                TotalScore += 1;
-                i += 1;
-            }
-            else
-            {
-                i += 1;
-            }
-        }
-
-        foreach (var pin in pins)
-        {
-            m_newPos.Clear();
-            m_newRot.Clear();
-
-            yield return new WaitForSeconds(5);
-
-            m_newPos.Add(pin.transform.position); // Every x seconds, add new pin positions to new pin list
-            m_newRot.Add(pin.transform.rotation); // Every x seconds, add new pin rotations to new rotation list
-
-            yield return new WaitForSeconds(5);
-        }
-        // yield return null;
-    }
 }
+
+    //IEnumerator CheckPins()
+    //{
+    //    var pins = GameObject.FindGameObjectsWithTag("Pin"); // Identifying every game oject with the 'Pin' tag attached
+    //    var i = 0; // Index Counter Variable
+
+    //    foreach (var new_pos in m_newPos)
+    //    {
+    //        Debug.Log("Comparing...");
+    //        if (new_pos != m_startingPos[i]) // For each new pin position, if it doesn't equal it's old position, increase score by 1 & move onto next pin to check
+    //        {
+    //            Debug.Log("+1 Score");
+
+    //            TotalScore += 1;
+    //            i += 1;
+    //        }
+    //        else
+    //        {
+    //            Debug.Log("0 Score");
+
+    //            i += 1;
+    //        }
+    //    }
+
+    //    foreach (var pin in pins)
+    //    {
+    //        Debug.Log("Adding New Pos/Rot Pins");
+    //        m_newPos.Add(pin.transform.position); // Every x seconds, add new pin positions to new pin list
+    //        m_newRot.Add(pin.transform.rotation); // Every x seconds, add new pin rotations to new rotation list
+
+    //        Debug.Log("Waiting");
+    //        yield return new WaitForSeconds(4);
+    //    }
+
+    //    Debug.Log("Clearing...");
+    //    m_newPos.Clear();
+    //    m_newRot.Clear();
+
+    //    Debug.Log("Waiting...");
+    //    yield return new WaitForSeconds(4);
+
+    //    // yield return null;
+    //}
+
 
 
